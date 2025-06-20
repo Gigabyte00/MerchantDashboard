@@ -1,4 +1,6 @@
+"use client";
 
+import { useState, useEffect } from 'react';
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import { Badge } from "@/components/ui/badge";
@@ -14,13 +16,13 @@ import {
 import { Bar, BarChart, CartesianGrid, XAxis, YAxis, ResponsiveContainer } from "recharts";
 import Link from "next/link";
 
-const chartData = [
-  { month: "January", revenue: Math.floor(Math.random() * 5000) + 1000 },
-  { month: "February", revenue: Math.floor(Math.random() * 5000) + 1000 },
-  { month: "March", revenue: Math.floor(Math.random() * 5000) + 1000 },
-  { month: "April", revenue: Math.floor(Math.random() * 5000) + 1000 },
-  { month: "May", revenue: Math.floor(Math.random() * 5000) + 1000 },
-  { month: "June", revenue: Math.floor(Math.random() * 5000) + 1000 },
+const initialChartData = [
+  { month: "January", revenue: 0 },
+  { month: "February", revenue: 0 },
+  { month: "March", revenue: 0 },
+  { month: "April", revenue: 0 },
+  { month: "May", revenue: 0 },
+  { month: "June", revenue: 0 },
 ];
 
 const chartConfig = {
@@ -39,6 +41,19 @@ const transactions = [
 ];
 
 export default function DashboardPage() {
+  const [chartData, setChartData] = useState(initialChartData);
+
+  useEffect(() => {
+    setChartData([
+      { month: "January", revenue: Math.floor(Math.random() * 5000) + 1000 },
+      { month: "February", revenue: Math.floor(Math.random() * 5000) + 1000 },
+      { month: "March", revenue: Math.floor(Math.random() * 5000) + 1000 },
+      { month: "April", revenue: Math.floor(Math.random() * 5000) + 1000 },
+      { month: "May", revenue: Math.floor(Math.random() * 5000) + 1000 },
+      { month: "June", revenue: Math.floor(Math.random() * 5000) + 1000 },
+    ]);
+  }, []);
+
   return (
     <div className="space-y-6">
       <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
@@ -138,7 +153,7 @@ export default function DashboardPage() {
           <CardDescription>Important notifications and tasks requiring your attention.</CardDescription>
         </CardHeader>
         <CardContent>
-          {true ? ( // Replace with actual alert logic
+          {true ? ( 
             <div className="space-y-3">
               <div className="flex items-start gap-3 rounded-lg border border-destructive/50 p-3">
                 <AlertTriangle className="h-5 w-5 flex-shrink-0 text-destructive mt-0.5" />
