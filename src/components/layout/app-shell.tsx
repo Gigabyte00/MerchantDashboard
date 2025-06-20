@@ -116,18 +116,16 @@ function Bitcoin(props: React.SVGProps<SVGSVGElement>) {
   );
 }
 
-
-interface AppShellProps {
+interface AppShellInternalProps {
   children: React.ReactNode;
   pageTitle: string;
 }
 
-export function AppShell({ children, pageTitle }: AppShellProps) {
+function AppShellInternal({ children, pageTitle }: AppShellInternalProps) {
   const pathname = usePathname();
   const { isMobile } = useSidebar();
 
   return (
-    <SidebarProvider defaultOpen>
       <div className="flex min-h-screen">
         <Sidebar collapsible={isMobile ? "offcanvas" : "icon"}>
           <SidebarHeader className="p-4">
@@ -238,6 +236,20 @@ export function AppShell({ children, pageTitle }: AppShellProps) {
           </main>
         </SidebarInset>
       </div>
+  );
+}
+
+interface AppShellProps {
+  children: React.ReactNode;
+  pageTitle: string;
+}
+
+export function AppShell({ children, pageTitle }: AppShellProps) {
+  return (
+    <SidebarProvider defaultOpen>
+      <AppShellInternal pageTitle={pageTitle}>
+        {children}
+      </AppShellInternal>
     </SidebarProvider>
   );
 }
