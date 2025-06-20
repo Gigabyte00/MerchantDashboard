@@ -8,7 +8,7 @@ import { Repeat } from "lucide-react";
 export default function RecurringBillingPage() {
   return (
     <div className="space-y-6">
-      <div className="flex items-center gap-2">
+      <div className="flex items-center gap-2 mb-4">
         <Repeat className="h-7 w-7 text-primary" />
         <h2 className="text-2xl font-semibold tracking-tight">Recurring Billing</h2>
       </div>

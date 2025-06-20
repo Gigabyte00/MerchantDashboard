@@ -8,7 +8,7 @@ import { Bitcoin as BitcoinIcon } from "lucide-react";
 export default function CryptoPaymentsPage() {
   return (
     <div className="space-y-6">
-      <div className="flex items-center gap-2">
+      <div className="flex items-center gap-2 mb-4">
         <BitcoinIcon className="h-7 w-7 text-primary" />
         <h2 className="text-2xl font-semibold tracking-tight">Crypto Payments</h2>
       </div>

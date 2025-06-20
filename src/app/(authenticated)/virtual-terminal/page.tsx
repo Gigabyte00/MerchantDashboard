@@ -8,7 +8,7 @@ import { Terminal } from "lucide-react";
 export default function VirtualTerminalPage() {
   return (
     <div className="space-y-6">
-      <div className="flex items-center gap-2">
+      <div className="flex items-center gap-2 mb-4">
         <Terminal className="h-7 w-7 text-primary" />
         <h2 className="text-2xl font-semibold tracking-tight">Virtual Terminal</h2>
       </div>

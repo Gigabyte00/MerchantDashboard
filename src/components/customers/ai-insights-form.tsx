@@ -8,8 +8,9 @@ import { Textarea } from "@/components/ui/textarea";
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 import { Label } from "@/components/ui/label";
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
-import { Loader2, Lightbulb, Target, ShieldCheck } from "lucide-react";
+import { Loader2, Lightbulb, Target, ShieldCheck, AlertTriangle as AlertTriangleIcon } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
+import { Separator } from "@/components/ui/separator";
 
 export function AiInsightsForm() {
   const [customerData, setCustomerData] = useState("");
@@ -116,7 +117,7 @@ Europe,$1800,2023-07-25,CUST005`;
       {error && (
          <div className="p-6 pt-0">
             <Alert variant="destructive">
-                <AlertTriangle className="h-4 w-4" />
+                <AlertTriangleIcon className="h-4 w-4" />
                 <AlertTitle>Error</AlertTitle>
                 <AlertDescription>{error}</AlertDescription>
             </Alert>
@@ -141,31 +142,5 @@ Europe,$1800,2023-07-25,CUST005`;
         </div>
       )}
     </Card>
-  );
-}
-
-// Helper component (can be moved to utils if used elsewhere)
-function Separator() {
-    return <hr className="my-4 border-border" />;
-}
-
-function AlertTriangle(props: React.SVGProps<SVGSVGElement>) {
-  return (
-    <svg
-      {...props}
-      xmlns="http://www.w3.org/2000/svg"
-      width="24"
-      height="24"
-      viewBox="0 0 24 24"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth="2"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-    >
-      <path d="m21.73 18-8-14a2 2 0 0 0-3.46 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3Z" />
-      <path d="M12 9v4" />
-      <path d="M12 17h.01" />
-    </svg>
   );
 }

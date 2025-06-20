@@ -10,6 +10,8 @@ import { Checkbox } from "@/components/ui/checkbox";
 import { Progress } from "@/components/ui/progress";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Building2, Landmark, Briefcase, ShieldCheck, ListChecks, UploadCloud, ArrowRight, ArrowLeft } from "lucide-react";
+import { Separator } from "@/components/ui/separator";
+import Image from "next/image";
 
 const steps = [
   { id: "business-info", name: "Business Info", icon: Building2, completed: true },
@@ -142,7 +144,7 @@ export default function OnboardingPage() {
                 <CardHeader><CardTitle className="text-base">Summary (Placeholder)</CardTitle></CardHeader>
                 <CardContent>
                   <p className="text-muted-foreground">Your business details, bank information, KYC documents, and selected providers will be listed here for final review.</p>
-                   <img src="https://placehold.co/600x300.png" alt="Placeholder summary" data-ai-hint="document summary" className="w-full rounded-md mt-4 object-cover" />
+                   <Image src="https://placehold.co/600x300.png" alt="Placeholder summary" data-ai-hint="document summary" width={600} height={300} className="w-full rounded-md mt-4 object-cover" />
                 </CardContent>
               </Card>
               <div className="flex items-center space-x-2 mt-4">
@@ -187,9 +189,4 @@ function FileUploadItem({ label }: { label: string }) {
       </Button>
     </div>
   );
-}
-
-// Helper component
-function Separator() {
-    return <hr className="my-4 border-border" />;
 }

@@ -1,3 +1,4 @@
+
 "use client";
 
 import { useState, useEffect } from 'react';
@@ -42,8 +43,11 @@ const transactions = [
 
 export default function DashboardPage() {
   const [chartData, setChartData] = useState(initialChartData);
+  const [hasAlerts, setHasAlerts] = useState(true); // Placeholder state for alerts
+  const [onboardingProgress, setOnboardingProgress] = useState(75); // Placeholder state for progress
 
   useEffect(() => {
+    // Simulate fetching data for the chart
     setChartData([
       { month: "January", revenue: Math.floor(Math.random() * 5000) + 1000 },
       { month: "February", revenue: Math.floor(Math.random() * 5000) + 1000 },
@@ -126,9 +130,9 @@ export default function DashboardPage() {
             <div>
               <div className="mb-1 flex justify-between items-center">
                 <span className="text-sm font-medium">Overall Progress</span>
-                <span className="text-sm font-medium text-primary">75%</span>
+                <span className="text-sm font-medium text-primary">{onboardingProgress}%</span>
               </div>
-              <Progress value={75} aria-label="Onboarding progress 75%" />
+              <Progress value={onboardingProgress} aria-label={`Onboarding progress ${onboardingProgress}%`} />
             </div>
             <ul className="space-y-2 text-sm text-muted-foreground">
               <li className="flex items-center gap-2"><span className="text-green-500">✔</span> Business Information</li>
@@ -153,7 +157,7 @@ export default function DashboardPage() {
           <CardDescription>Important notifications and tasks requiring your attention.</CardDescription>
         </CardHeader>
         <CardContent>
-          {true ? ( 
+          {hasAlerts ? ( 
             <div className="space-y-3">
               <div className="flex items-start gap-3 rounded-lg border border-destructive/50 p-3">
                 <AlertTriangle className="h-5 w-5 flex-shrink-0 text-destructive mt-0.5" />
