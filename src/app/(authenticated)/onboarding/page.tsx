@@ -55,7 +55,7 @@ export default function OnboardingPage() {
         
         <CardContent>
           <Tabs value={currentStepId} onValueChange={setCurrentStepId} className="w-full">
-            <TabsList className="grid w-full grid-cols-2 md:grid-cols-4 mb-6">
+            <TabsList className="grid w-full grid-cols-1 sm:grid-cols-2 md:grid-cols-4 mb-6">
               {steps.map(step => (
                 <TabsTrigger 
                   key={step.id} 
@@ -194,4 +194,3 @@ function FileUploadItem({ label }: { label: string }) {
     </div>
   );
 }
-
