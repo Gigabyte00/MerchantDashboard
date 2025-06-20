@@ -55,7 +55,7 @@ export default function OnboardingPage() {
         
         <CardContent>
           <Tabs value={currentStepId} onValueChange={setCurrentStepId} className="w-full">
-            <TabsList className="grid w-full grid-cols-2 md:grid-cols-4 mb-4">
+            <TabsList className="grid w-full grid-cols-2 md:grid-cols-4 mb-6">
               {steps.map(step => (
                 <TabsTrigger 
                   key={step.id} 
@@ -102,7 +102,7 @@ export default function OnboardingPage() {
             </TabsContent>
 
             <TabsContent value="bank-kyc" className="space-y-4 pt-4">
-              <h3 className="text-lg font-medium">Bank Account & KYC</h3>
+              <h3 className="text-lg font-medium">Bank & KYC</h3>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div>
                   <Label htmlFor="bankName">Bank Name</Label>

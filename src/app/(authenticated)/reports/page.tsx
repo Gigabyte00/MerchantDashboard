@@ -38,7 +38,7 @@ export default function ReportsPage() {
       </div>
 
       <Tabs defaultValue="authorizations" className="w-full">
-        <TabsList className="grid w-full grid-cols-2 md:w-[400px]">
+        <TabsList className="grid w-full grid-cols-2 md:w-[400px] mb-6">
           <TabsTrigger value="authorizations">Authorizations</TabsTrigger>
           <TabsTrigger value="settlements">Settlements</TabsTrigger>
         </TabsList>
