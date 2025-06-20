@@ -58,11 +58,11 @@ const navItems = [
 
 // Sub-menu for Payments & Billing
 const paymentsBillingItems = [
-  { label: "Recurring Billing", icon: CreditCard, disabled: true },
-  { label: "Invoices", icon: Receipt, disabled: true },
-  { label: "Smart Links (QR)", icon: QrCode, disabled: true },
-  { label: "Virtual Terminal", icon: Wallet, disabled: true },
-  { label: "Crypto Payments", icon: Bitcoin, disabled: true },
+  { label: "Recurring Billing", icon: CreditCard },
+  { label: "Invoices", icon: Receipt },
+  { label: "Smart Links (QR)", icon: QrCode },
+  { label: "Virtual Terminal", icon: Wallet },
+  { label: "Crypto Payments", icon: Bitcoin },
 ];
 
 function Receipt(props: React.SVGProps<SVGSVGElement>) {
@@ -163,9 +163,8 @@ function AppShellInternal({ children, pageTitle }: AppShellInternalProps) {
               {paymentsBillingItems.map((item) => (
                 <SidebarMenuItem key={item.label}>
                    <SidebarMenuButton
-                      disabled={item.disabled}
+                      disabled={(item as any).disabled} // Accessing potentially undefined 'disabled' prop
                       tooltip={item.label}
-                      className="cursor-not-allowed opacity-60"
                     >
                       <item.icon />
                       <span>{item.label}</span>
@@ -180,7 +179,7 @@ function AppShellInternal({ children, pageTitle }: AppShellInternalProps) {
               <DropdownMenuTrigger asChild>
                 <Button variant="ghost" className="w-full justify-start p-2 group-data-[collapsible=icon]:justify-center hover:bg-sidebar-accent hover:text-sidebar-accent-foreground">
                   <Avatar className="h-8 w-8">
-                    <AvatarImage src="https://placehold.co/40x40.png" alt="User Avatar" data-ai-hint="user avatar" />
+                    <AvatarImage src="https://placehold.co/40x40.png" alt="User Avatar" data-ai-hint="user avatar"/>
                     <AvatarFallback>U</AvatarFallback>
                   </Avatar>
                   <div className="ml-2 text-left group-data-[collapsible=icon]:hidden">
