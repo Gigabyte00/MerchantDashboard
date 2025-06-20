@@ -13,9 +13,11 @@ import {
   LogOut,
   CreditCard,
   FileCheck,
-  QrCode,
+  QrCode as QrCodeIcon, // Aliased to avoid conflict if QrCode is used as component name
   Wallet,
   Building,
+  Receipt as ReceiptIcon, // Added Receipt icon from lucide
+  Bitcoin as BitcoinIcon, // Added Bitcoin icon from lucide
 } from "lucide-react";
 
 import {
@@ -44,7 +46,7 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { cn } from "@/lib/utils";
 import React from "react";
-import { SheetTitle } from "@/components/ui/sheet"; // Added for accessibility
+import { SheetTitle } from "@/components/ui/sheet"; 
 
 const navItems = [
   { href: "/dashboard", icon: LayoutDashboard, label: "Dashboard" },
@@ -56,66 +58,17 @@ const navItems = [
   { href: "/settings", icon: Settings, label: "Settings" },
 ];
 
-// Sub-menu for Payments & Billing
+// Custom SVG components for Receipt and Bitcoin, if Lucide versions are not preferred or different
+// For this iteration, we are using Lucide icons: ReceiptIcon and BitcoinIcon
+
 const paymentsBillingItems = [
-  { label: "Recurring Billing", icon: CreditCard },
-  { label: "Invoices", icon: Receipt },
-  { label: "Smart Links (QR)", icon: QrCode },
-  { label: "Virtual Terminal", icon: Wallet },
-  { label: "Crypto Payments", icon: Bitcoin },
+  { href: "/recurring-billing", label: "Recurring Billing", icon: CreditCard },
+  { href: "/invoices", label: "Invoices", icon: ReceiptIcon },
+  { href: "/smart-links-qr", label: "Smart Links (QR)", icon: QrCodeIcon },
+  { href: "/virtual-terminal", label: "Virtual Terminal", icon: Wallet },
+  { href: "/crypto-payments", label: "Crypto Payments", icon: BitcoinIcon },
 ];
 
-function Receipt(props: React.SVGProps<SVGSVGElement>) {
-  return (
-    <svg
-      {...props}
-      xmlns="http://www.w3.org/2000/svg"
-      width="24"
-      height="24"
-      viewBox="0 0 24 24"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth="2"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-    >
-      <path d="M4 2v20l2-1 2 1 2-1 2 1 2-1 2 1V2l-2 1-2-1-2 1-2-1-2 1-2-1Z" />
-      <path d="M16 8h-6a2 2 0 1 0 0 4h6" />
-      <path d="M12 14v2" />
-    </svg>
-  );
-}
-
-
-function Bitcoin(props: React.SVGProps<SVGSVGElement>) {
-  return (
-    <svg
-      {...props}
-      xmlns="http://www.w3.org/2000/svg"
-      width="24"
-      height="24"
-      viewBox="0 0 24 24"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth="2"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-    >
-      <path d="M11.767 19.089c4.917-2.504 4.917-10.69.001-13.194m-4.513 1.524a6.628 6.628 0 0 0-1.016.487" />
-      <path d="M8.303 4.243a6.628 6.628 0 0 0-1.016.487" />
-      <path d="M4.236 8.343a6.61 6.61 0 0 0-.487 1.025" />
-      <path d="M19.765 15.657a6.61 6.61 0 0 0 .487-1.025" />
-      <path d="M6.211 6.726c.306-.293.64-.562.992-.805" />
-      <path d="M14.272 20.713a6.631 6.631 0 0 0 1.02-.49" />
-      <path d="M18.821 16.253c.306-.292.64-.562.992-.805" />
-      <path d="M11.588 2.732a6.631 6.631 0 0 0-1.02.49" />
-      <path d="M9 7.125C9 5 9.5 4 12 4s3 1 3 3.125S14.5 10 12 10s-3-.875-3-2.875" />
-      <path d="M12 10v4" />
-      <path d="M15 12H9" />
-      <circle cx="12" cy="12" r="10" />
-    </svg>
-  );
-}
 
 interface AppShellInternalProps {
   children: React.ReactNode;
@@ -156,34 +109,36 @@ function AppShellInternal({ children, pageTitle }: AppShellInternalProps) {
                   </Link>
                 </SidebarMenuItem>
               ))}
-              <Separator className="my-2" />
+              <Separator className="my-2 bg-sidebar-border" />
               <SidebarMenuItem className="group-data-[collapsible=icon]:hidden">
                 <div className="px-4 py-2 text-xs font-medium text-sidebar-foreground/70">Payments &amp; Billing</div>
               </SidebarMenuItem>
               {paymentsBillingItems.map((item) => (
-                <SidebarMenuItem key={item.label}>
-                   <SidebarMenuButton
-                      disabled={(item as any).disabled} // Accessing potentially undefined 'disabled' prop
-                      tooltip={item.label}
-                    >
-                      <item.icon />
-                      <span>{item.label}</span>
-                    </SidebarMenuButton>
+                <SidebarMenuItem key={item.href}>
+                   <Link href={item.href}>
+                    <SidebarMenuButton
+                        isActive={pathname === item.href}
+                        tooltip={item.label}
+                      >
+                        <item.icon />
+                        <span>{item.label}</span>
+                      </SidebarMenuButton>
+                   </Link>
                 </SidebarMenuItem>
               ))}
             </SidebarMenu>
           </SidebarContent>
           <SidebarFooter className="p-4 flex flex-col gap-2">
-            <Separator />
+            <Separator className="bg-sidebar-border"/>
              <DropdownMenu>
               <DropdownMenuTrigger asChild>
-                <Button variant="ghost" className="w-full justify-start p-2 group-data-[collapsible=icon]:justify-center hover:bg-sidebar-accent hover:text-sidebar-accent-foreground">
+                <Button variant="ghost" className="w-full justify-start p-2 group-data-[collapsible=icon]:justify-center hover:bg-sidebar-accent hover:text-sidebar-accent-foreground text-sidebar-foreground">
                   <Avatar className="h-8 w-8">
                     <AvatarImage src="https://placehold.co/40x40.png" alt="User Avatar" data-ai-hint="user avatar"/>
                     <AvatarFallback>U</AvatarFallback>
                   </Avatar>
                   <div className="ml-2 text-left group-data-[collapsible=icon]:hidden">
-                    <p className="text-sm font-medium text-sidebar-foreground">Admin User</p>
+                    <p className="text-sm font-medium">Admin User</p>
                     <p className="text-xs text-sidebar-foreground/70">admin@merchant.co</p>
                   </div>
                 </Button>
@@ -259,3 +214,4 @@ export function AppShell({ children, pageTitle }: AppShellProps) {
     </SidebarProvider>
   );
 }
+
