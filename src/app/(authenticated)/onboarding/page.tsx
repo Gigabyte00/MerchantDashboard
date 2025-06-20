@@ -57,14 +57,18 @@ export default function OnboardingPage() {
           <Tabs value={currentStepId} onValueChange={setCurrentStepId} className="w-full">
             <TabsList className="grid w-full grid-cols-2 md:grid-cols-4 mb-4">
               {steps.map(step => (
-                <TabsTrigger key={step.id} value={step.id} className="flex-col h-auto py-2 data-[state=active]:shadow-md data-[state=active]:bg-primary/10">
+                <TabsTrigger 
+                  key={step.id} 
+                  value={step.id} 
+                  className="flex-col h-auto px-2 py-2 data-[state=active]:shadow-md data-[state=active]:bg-primary/10 whitespace-normal"
+                >
                   <step.icon className={`h-5 w-5 mb-1 ${step.completed ? 'text-green-500' : 'text-muted-foreground'}`} />
                   <span className="text-xs">{step.name}</span>
                 </TabsTrigger>
               ))}
             </TabsList>
 
-            <TabsContent value="business-info" className="space-y-4">
+            <TabsContent value="business-info" className="space-y-4 pt-4">
               <h3 className="text-lg font-medium">Business Information</h3>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div>
@@ -97,7 +101,7 @@ export default function OnboardingPage() {
               </div>
             </TabsContent>
 
-            <TabsContent value="bank-kyc" className="space-y-4">
+            <TabsContent value="bank-kyc" className="space-y-4 pt-4">
               <h3 className="text-lg font-medium">Bank Account & KYC</h3>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div>
@@ -122,7 +126,7 @@ export default function OnboardingPage() {
               </div>
             </TabsContent>
 
-            <TabsContent value="providers" className="space-y-4">
+            <TabsContent value="providers" className="space-y-4 pt-4">
               <h3 className="text-lg font-medium">Payment Provider Selection</h3>
               <p className="text-sm text-muted-foreground">Choose your preferred merchant processors. You can select multiple.</p>
               <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
@@ -137,7 +141,7 @@ export default function OnboardingPage() {
               </div>
             </TabsContent>
 
-            <TabsContent value="review" className="space-y-4">
+            <TabsContent value="review" className="space-y-4 pt-4">
               <h3 className="text-lg font-medium">Review & Submit</h3>
               <p className="text-sm text-muted-foreground">Please review all your information before submitting.</p>
               <Card className="bg-muted/30">
@@ -190,4 +194,3 @@ function FileUploadItem({ label }: { label: string }) {
     </div>
   );
 }
-
