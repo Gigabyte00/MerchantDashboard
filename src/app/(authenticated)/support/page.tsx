@@ -32,7 +32,7 @@ export default function SupportPage() {
 
       <Card>
         <CardHeader>
-          <CardTitle className="flex items-center gap-2"><RotateCcw className="h-5 w-5"/> Process Refunds &amp; Voids</CardTitle>
+          <CardTitle className="flex items-center gap-2"><RotateCcw className="h-5 w-5"/> Process Refunds & Voids</CardTitle>
           <CardDescription>Quickly issue refunds or void transactions.</CardDescription>
         </CardHeader>
         <CardContent className="space-y-4">

@@ -19,7 +19,7 @@ export default function SettingsPage() {
       <Tabs defaultValue="account" className="w-full">
         <TabsList className="grid w-full grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6 mb-6">
           <TabsTrigger value="account"><UserCog className="mr-2 h-4 w-4" />Account</TabsTrigger>
-          <TabsTrigger value="billing"><FileSpreadsheet className="mr-2 h-4 w-4" />Billing &amp; Fees</TabsTrigger>
+          <TabsTrigger value="billing"><FileSpreadsheet className="mr-2 h-4 w-4" />Billing & Fees</TabsTrigger>
           <TabsTrigger value="notifications_settings"><Bell className="mr-2 h-4 w-4" />Notifications</TabsTrigger>
           <TabsTrigger value="security"><Lock className="mr-2 h-4 w-4" />Security</TabsTrigger>
           <TabsTrigger value="integrations"><Briefcase className="mr-2 h-4 w-4" />Integrations</TabsTrigger>
@@ -55,7 +55,7 @@ export default function SettingsPage() {
         <TabsContent value="billing">
           <Card>
             <CardHeader>
-              <CardTitle>Billing &amp; Fee Transparency</CardTitle>
+              <CardTitle>Billing & Fee Transparency</CardTitle>
               <CardDescription>View your subscription, payment methods, and fee breakdowns.</CardDescription>
             </CardHeader>
             <CardContent className="space-y-6">
@@ -129,7 +129,7 @@ export default function SettingsPage() {
         <TabsContent value="integrations">
              <Card>
                 <CardHeader>
-                    <CardTitle>Integrations &amp; Providers</CardTitle>
+                    <CardTitle>Integrations & Providers</CardTitle>
                     <CardDescription>Manage connections to payment processors and other services.</CardDescription>
                 </CardHeader>
                 <CardContent className="space-y-4">

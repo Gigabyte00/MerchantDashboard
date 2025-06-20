@@ -159,9 +159,9 @@ export default function DashboardPage() {
             </div>
             <ul className="space-y-2 text-sm text-muted-foreground">
               <li className="flex items-center gap-2"><span className="text-green-500">✔</span> Business Information</li>
-              <li className="flex items-center gap-2"><span className="text-green-500">✔</span> Bank &amp; KYC Details</li>
+              <li className="flex items-center gap-2"><span className="text-green-500">✔</span> Bank & KYC Details</li>
               <li className="flex items-center gap-2"><span className="text-yellow-500">●</span> Provider Selection (2/3 selected)</li>
-              <li className="flex items-center gap-2"><span className="text-gray-500">○</span> Final Review &amp; Submit</li>
+              <li className="flex items-center gap-2"><span className="text-gray-500">○</span> Final Review & Submit</li>
             </ul>
             <Button variant="outline" className="w-full" asChild>
               <Link href="/onboarding">
@@ -175,7 +175,7 @@ export default function DashboardPage() {
       <Card>
         <CardHeader>
           <CardTitle className="flex items-center gap-2">
-            <AlertTriangle className="h-6 w-6 text-destructive" /> Alerts &amp; Pending Actions
+            <AlertTriangle className="h-6 w-6 text-destructive" /> Alerts & Pending Actions
           </CardTitle>
           <CardDescription>Important notifications and tasks requiring your attention.</CardDescription>
         </CardHeader>
@@ -254,4 +254,3 @@ export default function DashboardPage() {
     </div>
   );
 }
-

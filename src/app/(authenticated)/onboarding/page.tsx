@@ -15,9 +15,9 @@ import Image from "next/image";
 
 const steps = [
   { id: "business-info", name: "Business Info", icon: Building2, completed: true },
-  { id: "bank-kyc", name: "Bank &amp; KYC", icon: Landmark, completed: true },
+  { id: "bank-kyc", name: "Bank & KYC", icon: Landmark, completed: true },
   { id: "providers", name: "Provider Selection", icon: Briefcase, completed: false },
-  { id: "review", name: "Review &amp; Submit", icon: ShieldCheck, completed: false },
+  { id: "review", name: "Review & Submit", icon: ShieldCheck, completed: false },
 ];
 
 export default function OnboardingPage() {
@@ -98,7 +98,7 @@ export default function OnboardingPage() {
             </TabsContent>
 
             <TabsContent value="bank-kyc" className="space-y-4">
-              <h3 className="text-lg font-medium">Bank Account &amp; KYC</h3>
+              <h3 className="text-lg font-medium">Bank Account & KYC</h3>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div>
                   <Label htmlFor="bankName">Bank Name</Label>
@@ -138,7 +138,7 @@ export default function OnboardingPage() {
             </TabsContent>
 
             <TabsContent value="review" className="space-y-4">
-              <h3 className="text-lg font-medium">Review &amp; Submit</h3>
+              <h3 className="text-lg font-medium">Review & Submit</h3>
               <p className="text-sm text-muted-foreground">Please review all your information before submitting.</p>
               <Card className="bg-muted/30">
                 <CardHeader><CardTitle className="text-base">Summary (Placeholder)</CardTitle></CardHeader>
