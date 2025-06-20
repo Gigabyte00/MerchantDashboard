@@ -182,13 +182,14 @@ export default function OnboardingPage() {
 
 
 function FileUploadItem({ label }: { label: string }) {
+  const inputId = `file-${label.toLowerCase().replace(/\W/g, '-')}`;
   return (
-    <div className="p-3 border rounded-md flex items-center justify-between bg-background hover:bg-muted/50 transition-colors">
-      <Label htmlFor={`file-${label.toLowerCase().replace(/\W/g, '-')}`} className="text-sm font-medium">{label}</Label>
-      <Button variant="outline" size="sm" asChild>
-        <Label htmlFor={`file-${label.toLowerCase().replace(/\W/g, '-')}`} className="cursor-pointer">
+    <div className="p-3 border rounded-md flex flex-col items-start gap-2 sm:flex-row sm:items-center sm:justify-between bg-background hover:bg-muted/50 transition-colors">
+      <Label htmlFor={inputId} className="text-sm font-medium">{label}</Label>
+      <Button variant="outline" size="sm" asChild className="w-full sm:w-auto">
+        <Label htmlFor={inputId} className="cursor-pointer flex items-center justify-center sm:justify-start">
           <UploadCloud className="mr-2 h-4 w-4" /> Upload
-          <Input id={`file-${label.toLowerCase().replace(/\W/g, '-')}`} type="file" className="sr-only" />
+          <Input id={inputId} type="file" className="sr-only" />
         </Label>
       </Button>
     </div>
