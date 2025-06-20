@@ -53,17 +53,17 @@ export default function OnboardingPage() {
           </div>
         </CardHeader>
         
-        <Tabs value={currentStepId} onValueChange={setCurrentStepId} className="w-full">
-          <TabsList className="grid w-full grid-cols-2 md:grid-cols-4 mb-4 px-6">
-            {steps.map(step => (
-              <TabsTrigger key={step.id} value={step.id} className="flex-col h-auto py-2 data-[state=active]:shadow-md data-[state=active]:bg-primary/10">
-                <step.icon className={`h-5 w-5 mb-1 ${step.completed ? 'text-green-500' : 'text-muted-foreground'}`} />
-                <span className="text-xs">{step.name}</span>
-              </TabsTrigger>
-            ))}
-          </TabsList>
+        <CardContent>
+          <Tabs value={currentStepId} onValueChange={setCurrentStepId} className="w-full">
+            <TabsList className="grid w-full grid-cols-2 md:grid-cols-4 mb-4">
+              {steps.map(step => (
+                <TabsTrigger key={step.id} value={step.id} className="flex-col h-auto py-2 data-[state=active]:shadow-md data-[state=active]:bg-primary/10">
+                  <step.icon className={`h-5 w-5 mb-1 ${step.completed ? 'text-green-500' : 'text-muted-foreground'}`} />
+                  <span className="text-xs">{step.name}</span>
+                </TabsTrigger>
+              ))}
+            </TabsList>
 
-          <CardContent>
             <TabsContent value="business-info" className="space-y-4">
               <h3 className="text-lg font-medium">Business Information</h3>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -154,8 +154,8 @@ export default function OnboardingPage() {
                 </Label>
               </div>
             </TabsContent>
-          </CardContent>
-        </Tabs>
+          </Tabs>
+        </CardContent>
         
         <CardFooter className="flex justify-between border-t pt-6">
             <Button variant="outline" onClick={goToPrevStep} disabled={currentStepIndex === 0}>
@@ -190,3 +190,4 @@ function FileUploadItem({ label }: { label: string }) {
     </div>
   );
 }
+
