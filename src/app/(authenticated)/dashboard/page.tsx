@@ -7,7 +7,7 @@ import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@
 import { Badge } from "@/components/ui/badge";
 import { Progress } from "@/components/ui/progress";
 import { Button } from "@/components/ui/button";
-import { DollarSign, Users, CreditCard, AlertTriangle, TrendingUp, ArrowRight, ListChecks } from "lucide-react";
+import { DollarSign, Users, CreditCard, AlertTriangle, TrendingUp, ArrowRight, ListChecks, Receipt as ReceiptIcon, Link2 as Link2Icon } from "lucide-react";
 import {
   ChartTooltip,
   ChartTooltipContent,
@@ -43,11 +43,10 @@ const transactions = [
 
 export default function DashboardPage() {
   const [chartData, setChartData] = useState(initialChartData);
-  const [hasAlerts, setHasAlerts] = useState(true); // Placeholder state for alerts
-  const [onboardingProgress, setOnboardingProgress] = useState(75); // Placeholder state for progress
+  const [hasAlerts, setHasAlerts] = useState(true); 
+  const [onboardingProgress, setOnboardingProgress] = useState(75); 
 
   useEffect(() => {
-    // Simulate fetching data for the chart
     setChartData([
       { month: "January", revenue: Math.floor(Math.random() * 5000) + 1000 },
       { month: "February", revenue: Math.floor(Math.random() * 5000) + 1000 },
@@ -60,6 +59,30 @@ export default function DashboardPage() {
 
   return (
     <div className="space-y-6">
+      <Card>
+        <CardHeader>
+          <CardTitle>Quick Actions</CardTitle>
+          <CardDescription>Easily access common payment tasks.</CardDescription>
+        </CardHeader>
+        <CardContent className="flex flex-wrap gap-4">
+          <Button asChild size="lg">
+            <Link href="/virtual-terminal">
+              <CreditCard className="mr-2 h-5 w-5" /> Process Payment
+            </Link>
+          </Button>
+          <Button asChild variant="outline" size="lg">
+            <Link href="/invoices">
+              <ReceiptIcon className="mr-2 h-5 w-5" /> Send Invoice
+            </Link>
+          </Button>
+          <Button asChild variant="outline" size="lg">
+            <Link href="/smart-links-qr">
+              <Link2Icon className="mr-2 h-5 w-5" /> Create Payment Link
+            </Link>
+          </Button>
+        </CardContent>
+      </Card>
+
       <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
         <Card>
           <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
@@ -231,3 +254,4 @@ export default function DashboardPage() {
     </div>
   );
 }
+
