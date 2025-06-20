@@ -157,26 +157,39 @@ const SidebarProvider = React.forwardRef<
 )
 SidebarProvider.displayName = "SidebarProvider"
 
-const Sidebar = React.forwardRef<
-  HTMLDivElement,
-  React.ComponentProps<"div"> & {
-    side?: "left" | "right"
-    variant?: "sidebar" | "floating" | "inset"
-    collapsible?: "offcanvas" | "icon" | "none"
-  }
->(
+// Define props for Sidebar, explicitly listing all custom props
+interface SidebarCustomProps {
+  side?: "left" | "right";
+  variant?: "sidebar" | "floating" | "inset";
+  collapsible?: "offcanvas" | "icon" | "none";
+  open?: boolean; // For Sheet's open state
+  onOpenChange?: (open: boolean) => void; // For Sheet's onOpenChange state
+}
+
+// Combine with standard div props
+type SidebarProps = SidebarCustomProps & React.ComponentProps<"div">;
+
+
+const Sidebar = React.forwardRef<HTMLDivElement, SidebarProps>(
   (
     {
+      // Destructure all custom props first
       side = "left",
       variant = "sidebar",
       collapsible = "offcanvas",
+      open: sheetOpen, 
+      onOpenChange: sheetOnOpenChange,
+      
+      // Destructure standard div props that are explicitly used or modified
       className,
       children,
-      ...props
+      
+      // Collect all other standard div props (like id, style, data-*, aria-*, etc.)
+      ...restDivProps 
     },
     ref
   ) => {
-    const { isMobile, state, openMobile, setOpenMobile } = useSidebar()
+    const { isMobile, state } = useSidebar()
 
     if (collapsible === "none") {
       return (
@@ -186,16 +199,16 @@ const Sidebar = React.forwardRef<
             className
           )}
           ref={ref}
-          {...props}
+          {...restDivProps} 
         >
           {children}
         </div>
       )
     }
-
+    
     if (isMobile) {
       return (
-        <Sheet open={openMobile} onOpenChange={setOpenMobile} {...props}>
+        <Sheet open={sheetOpen} onOpenChange={sheetOnOpenChange}>
           <SheetContent
             data-sidebar="sidebar"
             data-mobile="true"
@@ -246,7 +259,7 @@ const Sidebar = React.forwardRef<
               : "group-data-[collapsible=icon]:w-[--sidebar-width-icon] group-data-[side=left]:border-r group-data-[side=right]:border-l",
             className
           )}
-          {...props}
+          {...restDivProps}
         >
           <div
             data-sidebar="sidebar"
