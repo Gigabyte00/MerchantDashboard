@@ -44,6 +44,7 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { cn } from "@/lib/utils";
 import React from "react";
+import { SheetTitle } from "@/components/ui/sheet"; // Added for accessibility
 
 const navItems = [
   { href: "/dashboard", icon: LayoutDashboard, label: "Dashboard" },
@@ -123,14 +124,20 @@ interface AppShellInternalProps {
 
 function AppShellInternal({ children, pageTitle }: AppShellInternalProps) {
   const pathname = usePathname();
-  const { isMobile } = useSidebar();
+  const { isMobile, openMobile, setOpenMobile } = useSidebar();
+
 
   return (
       <div className="flex min-h-screen">
-        <Sidebar collapsible={isMobile ? "offcanvas" : "icon"}>
+        <Sidebar 
+          collapsible={isMobile ? "offcanvas" : "icon"}
+          open={openMobile}
+          onOpenChange={setOpenMobile}
+        >
+          {isMobile && <SheetTitle className="sr-only">Navigation Menu</SheetTitle>}
           <SidebarHeader className="p-4">
             <Link href="/dashboard" className="flex items-center gap-2 group-data-[collapsible=icon]:justify-center">
-              <Building className="h-8 w-8 text-primary group-data-[state=expanded]:text-sidebar-primary" />
+              <Building className="h-8 w-8 text-sidebar-primary" />
               <span className="font-semibold text-lg text-sidebar-foreground group-data-[collapsible=icon]:hidden">Merchant HQ</span>
             </Link>
           </SidebarHeader>
@@ -253,4 +260,3 @@ export function AppShell({ children, pageTitle }: AppShellProps) {
     </SidebarProvider>
   );
 }
-

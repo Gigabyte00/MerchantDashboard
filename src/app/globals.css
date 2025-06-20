@@ -41,17 +41,17 @@
     --radius: 0.5rem;
 
     /* Sidebar specific theme */
-    --sidebar-background: 300 70% 18%; /* Darker shade of primary for sidebar */
-    --sidebar-foreground: 300 20% 88%; /* Light purple text */
+    --sidebar-background: 240 10% 18%; /* Dark Neutral Cool Gray */
+    --sidebar-foreground: 0 0% 85%;    /* Light Gray for text */
     
-    --sidebar-primary: 0 0% 98%; /* White for active/hover states */
-    --sidebar-primary-foreground: 300 100% 25.1%; /* Primary color for text on active items */
+    --sidebar-primary: 0 0% 98%;      /* Off-White for active item icon/text */
+    --sidebar-primary-foreground: 240 10% 18%; /* Sidebar background color, for text on bg-sidebar-primary */
     
-    --sidebar-accent: 300 80% 35%; /* Brighter purple for hover */
-    --sidebar-accent-foreground: 0 0% 98%; /* White text on hover */
+    --sidebar-accent: 240 10% 28%;    /* Slightly Lighter Cool Gray for Hover/Active BG */
+    --sidebar-accent-foreground: 0 0% 98%; /* Off-White Text on Accent BG */
     
-    --sidebar-border: 300 60% 15%; /* Darker purple for borders */
-    --sidebar-ring: 0 0% 98%; /* White for focus ring */
+    --sidebar-border: 240 10% 13%;   /* Darker Neutral Border */
+    --sidebar-ring: 220 70% 60%;    /* Contrasting Blue Ring */
   }
 
   .dark {
@@ -90,17 +90,17 @@
     --chart-5: 300 75% 55%;
 
     /* Dark Sidebar specific theme */
-    --sidebar-background: 300 60% 12%; /* Even darker primary */
-    --sidebar-foreground: 300 20% 80%; 
+    --sidebar-background: 240 8% 12%;  /* Very Dark Neutral Cool Gray */
+    --sidebar-foreground: 0 0% 80%;    /* Light Gray */
     
-    --sidebar-primary: 0 0% 90%; 
-    --sidebar-primary-foreground: 300 60% 12%;
+    --sidebar-primary: 0 0% 95%;      /* Off-White/Very Light Gray */
+    --sidebar-primary-foreground: 240 8% 12%; /* Sidebar background */
     
-    --sidebar-accent: 300 70% 25%; 
-    --sidebar-accent-foreground: 0 0% 90%;
+    --sidebar-accent: 240 8% 22%;     /* Subtle Darker Cool Gray for Hover/Active BG */
+    --sidebar-accent-foreground: 0 0% 95%; /* Off-White Text on Accent BG */
     
-    --sidebar-border: 300 50% 10%;
-    --sidebar-ring: 0 0% 90%;
+    --sidebar-border: 240 5% 8%;    /* Very Dark Border */
+    --sidebar-ring: 220 65% 65%;   /* Contrasting Blue Ring for Dark Mode */
   }
 }
 
