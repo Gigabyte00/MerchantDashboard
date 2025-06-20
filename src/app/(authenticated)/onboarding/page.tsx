@@ -68,7 +68,7 @@ export default function OnboardingPage() {
               ))}
             </TabsList>
 
-            <TabsContent value="business-info" className="space-y-4 pt-4">
+            <TabsContent value="business-info" className="mt-6 space-y-4">
               <h3 className="text-lg font-medium">Business Information</h3>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div>
@@ -101,7 +101,7 @@ export default function OnboardingPage() {
               </div>
             </TabsContent>
 
-            <TabsContent value="bank-kyc" className="space-y-4 pt-4">
+            <TabsContent value="bank-kyc" className="mt-6 space-y-4">
               <h3 className="text-lg font-medium">Bank & KYC</h3>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div>
@@ -126,7 +126,7 @@ export default function OnboardingPage() {
               </div>
             </TabsContent>
 
-            <TabsContent value="providers" className="space-y-4 pt-4">
+            <TabsContent value="providers" className="mt-6 space-y-4">
               <h3 className="text-lg font-medium">Payment Provider Selection</h3>
               <p className="text-sm text-muted-foreground">Choose your preferred merchant processors. You can select multiple.</p>
               <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
@@ -141,7 +141,7 @@ export default function OnboardingPage() {
               </div>
             </TabsContent>
 
-            <TabsContent value="review" className="space-y-4 pt-4">
+            <TabsContent value="review" className="mt-6 space-y-4">
               <h3 className="text-lg font-medium">Review & Submit</h3>
               <p className="text-sm text-muted-foreground">Please review all your information before submitting.</p>
               <Card className="bg-muted/30">
@@ -194,3 +194,4 @@ function FileUploadItem({ label }: { label: string }) {
     </div>
   );
 }
+
