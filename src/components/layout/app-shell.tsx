@@ -138,7 +138,7 @@ function AppShellInternal({ children, pageTitle }: AppShellInternalProps) {
             <SidebarMenu>
               {navItems.map((item) => (
                 <SidebarMenuItem key={item.href}>
-                  <Link href={item.href} legacyBehavior passHref>
+                  <Link href={item.href}>
                     <SidebarMenuButton
                       isActive={pathname === item.href || (item.href !== "/dashboard" && pathname.startsWith(item.href))}
                       tooltip={item.label}
@@ -253,3 +253,4 @@ export function AppShell({ children, pageTitle }: AppShellProps) {
     </SidebarProvider>
   );
 }
+
