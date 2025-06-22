@@ -3,6 +3,7 @@
 import { AppShell } from "@/components/layout/app-shell";
 import { usePathname } from "next/navigation";
 import { ReactNode } from "react";
+import { AuthGuard } from "@/hooks/use-auth";
 
 // Helper function to generate a title from the pathname
 const generateTitleFromPath = (pathname: string): string => {
@@ -23,5 +24,9 @@ export default function AuthenticatedLayout({
 }) {
   const pathname = usePathname();
   const pageTitle = generateTitleFromPath(pathname);
-  return <AppShell pageTitle={pageTitle}>{children}</AppShell>;
+  return (
+    <AuthGuard>
+      <AppShell pageTitle={pageTitle}>{children}</AppShell>
+    </AuthGuard>
+  );
 }
