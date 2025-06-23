@@ -1,13 +1,11 @@
 'use client';
 
 import { useState, useEffect, createContext, useContext, ReactNode } from 'react';
-import { onAuthStateChanged, User } from 'firebase/auth';
-import { auth } from '@/lib/firebase';
 import { useRouter } from 'next/navigation';
 import { Building } from 'lucide-react';
 
 interface AuthContextType {
-  user: User | null;
+  user: any;
   loading: boolean;
 }
 
@@ -22,18 +20,35 @@ const FullscreenLoader = ({ message }: { message: string }) => (
     </div>
 );
 
-
 export const AuthProvider = ({ children }: { children: ReactNode }) => {
-  const [user, setUser] = useState<User | null>(null);
+  const [user, setUser] = useState<any>(null);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    const unsubscribe = onAuthStateChanged(auth, (user) => {
-      setUser(user);
-      setLoading(false);
-    });
+    // Only run on client side
+    if (typeof window === 'undefined') return;
 
-    return () => unsubscribe();
+    const initializeAuth = async () => {
+      try {
+        const { onAuthStateChanged } = await import('firebase/auth');
+        const { auth } = await import('@/lib/firebase');
+        
+        const unsubscribe = onAuthStateChanged(auth, (user) => {
+          setUser(user);
+          setLoading(false);
+        });
+
+        return () => unsubscribe();
+      } catch (error) {
+        console.error('Failed to initialize auth:', error);
+        setLoading(false);
+      }
+    };
+
+    const cleanup = initializeAuth();
+    return () => {
+      cleanup.then(unsubscribe => unsubscribe && unsubscribe());
+    };
   }, []);
   
   if (loading) {
