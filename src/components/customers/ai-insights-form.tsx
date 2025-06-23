@@ -1,7 +1,6 @@
 "use client";
 
-import { useState, useTransition } from "react";
-import { customerInsightsAnalysis, CustomerInsightsAnalysisInput, CustomerInsightsAnalysisOutput } from "@/ai/flows/customer-insights-analysis";
+import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
@@ -11,11 +10,16 @@ import { Loader2, Lightbulb, Target, ShieldCheck, AlertTriangle as AlertTriangle
 import { useToast } from "@/hooks/use-toast";
 import { Separator } from "@/components/ui/separator";
 
+interface AnalysisResult {
+  customerSegments: string;
+  recommendations: string;
+}
+
 export function AiInsightsForm() {
   const [customerData, setCustomerData] = useState("");
-  const [result, setResult] = useState<CustomerInsightsAnalysisOutput | null>(null);
+  const [result, setResult] = useState<AnalysisResult | null>(null);
   const [error, setError] = useState<string | null>(null);
-  const [isPending, startTransition] = useTransition();
+  const [isPending, setIsPending] = useState(false);
   const { toast } = useToast();
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
@@ -33,26 +37,57 @@ export function AiInsightsForm() {
       return;
     }
 
-    startTransition(async () => {
-      try {
-        const input: CustomerInsightsAnalysisInput = { customerData };
-        const analysisResult = await customerInsightsAnalysis(input);
-        setResult(analysisResult);
-        toast({
-          title: "Analysis Complete",
-          description: "Customer insights generated successfully.",
-        });
-      } catch (e: unknown) {
-        const error = e as { message?: string };
-        console.error("AI Analysis Error:", error);
-        setError(error.message || "An unexpected error occurred during analysis.");
-        toast({
-          title: "Analysis Failed",
-          description: error.message || "Could not generate customer insights.",
-          variant: "destructive",
-        });
-      }
-    });
+    setIsPending(true);
+    
+    try {
+      // Simulate processing delay
+      await new Promise(resolve => setTimeout(resolve, 2000));
+      
+      // Mock analysis based on input data
+      const lines = customerData.split('\n').filter(line => line.trim());
+      const customerCount = lines.length - 1; // Subtract header
+      
+      const mockResult: AnalysisResult = {
+        customerSegments: `Based on analysis of ${customerCount} customers:
+
+1. **High-Value Customers** (Spend > $1000): 30% of customers
+   - Primarily from North America and Europe
+   - Frequent contact patterns (monthly interactions)
+
+2. **Mid-Value Customers** (Spend $500-$1000): 45% of customers
+   - Diverse regional distribution
+   - Moderate contact frequency (quarterly interactions)
+
+3. **Emerging Markets** (Spend < $500): 25% of customers
+   - Strong presence in Asia and emerging regions
+   - Growing engagement patterns`,
+        
+        recommendations: `Strategic Recommendations:
+
+1. **Personalized Marketing**: Segment campaigns by spend level and region
+2. **Customer Retention**: Focus on high-value customers with premium support
+3. **Growth Strategy**: Invest in emerging markets with targeted outreach
+4. **Communication**: Adjust contact frequency based on customer segment
+5. **Product Development**: Develop region-specific features and pricing tiers`
+      };
+      
+      setResult(mockResult);
+      toast({
+        title: "Analysis Complete",
+        description: "Customer insights generated successfully.",
+      });
+    } catch (e) {
+      const error = e as { message?: string };
+      console.error("Analysis Error:", error);
+      setError(error.message || "An unexpected error occurred during analysis.");
+      toast({
+        title: "Analysis Failed",
+        description: error.message || "Could not generate customer insights.",
+        variant: "destructive",
+      });
+    } finally {
+      setIsPending(false);
+    }
   };
 
   const sampleData = `Region,Spend,LastContactDate,CustomerID
@@ -71,7 +106,7 @@ Europe,$1800,2023-07-25,CUST005`;
       <CardHeader>
         <CardTitle className="flex items-center gap-2">
           <Lightbulb className="h-6 w-6 text-primary" />
-          AI Customer Insights
+          Customer Insights (Demo Mode)
         </CardTitle>
         <CardDescription>
           Enter customer data (e.g., CSV or JSON format including region, spend habits, contact dates) to get AI-powered segmentation and recommendations.
