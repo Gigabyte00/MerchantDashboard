@@ -1,4 +1,3 @@
-
 "use client";
 import { AppShell } from "@/components/layout/app-shell";
 import { usePathname } from "next/navigation";
@@ -23,7 +22,7 @@ export default function AuthenticatedLayout({
   children: ReactNode;
 }) {
   const pathname = usePathname();
-  const pageTitle = generateTitleFromPath(pathname);
+  const pageTitle = generateTitleFromPath(pathname || '/dashboard');
   return (
     <AuthGuard>
       <AppShell pageTitle={pageTitle}>{children}</AppShell>

@@ -1,4 +1,3 @@
-
 "use client";
 
 import Link from "next/link";
@@ -46,7 +45,6 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import { cn } from "@/lib/utils";
 import React from "react";
 import { SheetTitle } from "@/components/ui/sheet"; 
 import { useAuth } from "@/hooks/use-auth";
@@ -71,7 +69,9 @@ const paymentsBillingItems = [
   { href: "/smart-links-qr", label: "Smart Links (QR)", icon: QrCodeIcon },
   { href: "/virtual-terminal", label: "Virtual Terminal", icon: Wallet },
  { href: "/crypto", label: "Crypto Payments", icon: BitcoinIcon },
-];interface AppShellInternalProps {
+];
+
+interface AppShellInternalProps {
   children: React.ReactNode;
   pageTitle: string;
 }
@@ -123,7 +123,10 @@ function AppShellInternal({ children, pageTitle }: AppShellInternalProps) {
                 <SidebarMenuItem key={item.href}>
                   <Link href={item.href}>
                     <SidebarMenuButton
-                      isActive={pathname === item.href || (item.href !== "/dashboard" && pathname.startsWith(item.href))}
+                      isActive={
+                        pathname === item.href ||
+                        (item.href !== "/dashboard" && typeof pathname === "string" && pathname.startsWith(item.href))
+                      }
                       tooltip={item.label}
                     >
                       <item.icon />

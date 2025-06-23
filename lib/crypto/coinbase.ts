@@ -15,7 +15,7 @@ interface CoinbaseCharge {
   };
   metadata: {
     merchantId: string;
-    [key: string]: any; // Allow other metadata fields
+    [key: string]: unknown; // Allow other metadata fields
   };
   // Add other relevant charge properties
 }
@@ -25,7 +25,7 @@ export const createCoinbaseCharge = async (data: {
   amount: number;
   merchantId: string;
   currency?: string; // Make currency optional, default to USD
-  metadata?: { [key: string]: any }; // Allow additional metadata
+  metadata?: Record<string, unknown>; // Allow additional metadata
 }) => {
   try {
     const res = await axios.post<CoinbaseCharge>(
@@ -51,8 +51,9 @@ export const createCoinbaseCharge = async (data: {
       }
     );
     return res.data;
-  } catch (error: any) {
-    console.error('Error creating Coinbase charge:', error.response?.data || error.message);
+  } catch (error: unknown) {
+    const err = error as { response?: { data?: unknown }; message?: string };
+    console.error('Error creating Coinbase charge:', err.response?.data || err.message);
     throw new Error('Failed to create Coinbase charge');
   }
 };
@@ -69,8 +70,9 @@ export const retrieveCoinbaseCharge = async (chargeId: string) => {
       }
     );
     return res.data;
-  } catch (error: any) {
-    console.error(`Error retrieving Coinbase charge ${chargeId}:`, error.response?.data || error.message);
+  } catch (error: unknown) {
+    const err = error as { response?: { data?: unknown }; message?: string };
+    console.error(`Error retrieving Coinbase charge ${chargeId}:`, err.response?.data || err.message);
     throw new Error(`Failed to retrieve Coinbase charge ${chargeId}`);
   }
 };

@@ -28,7 +28,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
  // we can simply return the list of unsynced transactions that meet the criteria.
  // Further processing or syncing to accounting systems should happen elsewhere.
 
-    const syncResults = unsyncedTransactions.map(transaction => ({ id: transaction.id, status: 'awaiting_accounting_sync' }));
+    const syncResults = unsyncedTransactions.map((transaction: any) => ({ id: transaction.id, status: 'awaiting_accounting_sync' }));
 
     res.status(200).json({ message: 'Sync process completed', results: syncResults });
 

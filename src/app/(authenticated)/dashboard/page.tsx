@@ -1,4 +1,3 @@
-
 "use client";
 
 import { useState, useEffect } from 'react';
@@ -43,8 +42,8 @@ const transactions = [
 
 export default function DashboardPage() {
   const [chartData, setChartData] = useState(initialChartData);
-  const [hasAlerts, setHasAlerts] = useState(true); 
-  const [onboardingProgress, setOnboardingProgress] = useState(75); 
+  const [hasAlerts] = useState(true); 
+  const [onboardingProgress] = useState(75); 
 
   useEffect(() => {
     setChartData([

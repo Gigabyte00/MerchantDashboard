@@ -1,6 +1,13 @@
-// lib/crypto/quickbooks.ts
 import axios from 'axios';
-import { CryptoTransaction } from '@prisma/client';
+
+interface QuickBooksTransaction {
+  id: string;
+  amount: number;
+  memo: string;
+  currency: string;
+  merchantId: string;
+  invoiceId?: string;
+}
 
 // Replace with your actual QuickBooks API base URL
 const QUICKBOOKS_API_BASE_URL = 'YOUR_QUICKBOOKS_API_BASE_URL';
@@ -20,7 +27,7 @@ export const postToLedger = async (token: string, transactionData: {
   memo: string;
   currency: string;
   merchantId: string;
-}): Promise<any> => {
+}): Promise<unknown> => {
   console.log('Posting to QuickBooks ledger:', transactionData);
   const response = await axios.post(
     `${QUICKBOOKS_API_BASE_URL}/transactions`, // Replace with actual ledger endpoint
@@ -35,19 +42,20 @@ export const postToLedger = async (token: string, transactionData: {
   return response.data;
 };
 
-export const syncToQuickBooks = async (tx: CryptoTransaction) => {
+export const syncToQuickBooks = async (tx: QuickBooksTransaction): Promise<unknown> => {
   try {
     const token = await getQuickBooksToken();
     const result = await postToLedger(token, {
       amount: tx.amount,
-      memo: `Crypto Payment ${tx.id} for invoice ${tx.invoiceId}`,
+      memo: `Transaction ${tx.id} for invoice ${tx.invoiceId}`,
       currency: tx.currency,
       merchantId: tx.merchantId, // Assuming merchantId is relevant for QB
     });
     console.log(`Successfully synced transaction ${tx.id} to QuickBooks`, result);
     return result;
-  } catch (error) {
-    console.error(`Error syncing transaction ${tx.id} to QuickBooks:`, error);
+  } catch (error: unknown) {
+    const err = error as { response?: { data?: unknown }; message?: string };
+    console.error(`Error syncing transaction ${tx.id} to QuickBooks:`, err.response?.data || err.message);
     throw error; // Re-throw the error for handling in the calling function
   }
-};
+}; 

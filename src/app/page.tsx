@@ -1,4 +1,3 @@
-
 'use client';
 
 import { useEffect, useState } from 'react';
@@ -65,10 +64,11 @@ export default function HomePage() {
         });
       }
       // The useEffect will handle the redirect on auth state change
-    } catch (err: any) {
-      console.error("Authentication failed", err);
+    } catch (err: unknown) {
+      const error = err as { code?: string; message?: string };
+      console.error("Authentication failed", error);
       let message = "An unexpected error occurred.";
-      switch (err.code) {
+      switch (error.code) {
         case 'auth/email-already-in-use':
           message = "This email is already in use. Please sign in or use a different email.";
           break;
@@ -84,7 +84,7 @@ export default function HomePage() {
              message = "Invalid email or password. Please try again.";
              break;
         default:
-          message = err.message || message;
+          message = error.message || message;
       }
       setError(message);
     } finally {

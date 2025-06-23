@@ -1,6 +1,7 @@
-// lib/crypto/netsuite.ts
+// lib/integrations/netsuite.ts
 
 import axios from 'axios';
+// @ts-expect-error: No types for oauth-1.0a
 import OAuth from 'oauth-1.0a';
 import crypto from 'crypto';
 
@@ -19,7 +20,7 @@ interface NetSuiteTransactionData {
   memo: string;
   currency: string;
   merchantId: string;
-  cryptoTransactionId: string;
+  transactionId: string;
 }
 
 const getNetSuiteOAuthHeader = (
@@ -33,7 +34,7 @@ const getNetSuiteOAuthHeader = (
       secret: config.consumerSecret,
     },
     signature_method: 'HMAC-SHA256',
-    hash_function(base_string, key) {
+    hash_function(base_string: string, key: string) {
       return crypto.createHmac('sha256', key).update(base_string).digest('base64');
     },
   });
@@ -62,7 +63,7 @@ const getNetSuiteOAuthHeader = (
 export const syncToNetSuite = async (
   config: NetSuiteConfig,
   txData: NetSuiteTransactionData
-) => {
+): Promise<unknown> => {
   try {
     const url = config.restletUrl;
     const method = 'POST';
@@ -82,10 +83,11 @@ export const syncToNetSuite = async (
     // Assuming your RESTlet returns a success indicator or relevant data
     return response.data;
 
-  } catch (error) {
-    console.error('Error syncing to NetSuite:', error);
+  } catch (error: unknown) {
+    const err = error as { response?: { data?: unknown }; message?: string };
+    console.error('Error syncing to NetSuite:', err.response?.data || err.message);
     throw error; // Re-throw the error for handling in the calling function
   }
 };
 
-// You might add other NetSuite related functions here, e.g., for fetching data if needed.
+// You might add other NetSuite related functions here, e.g., for fetching data if needed. 

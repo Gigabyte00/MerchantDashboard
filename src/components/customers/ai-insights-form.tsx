@@ -1,4 +1,3 @@
-
 "use client";
 
 import { useState, useTransition } from "react";
@@ -43,12 +42,13 @@ export function AiInsightsForm() {
           title: "Analysis Complete",
           description: "Customer insights generated successfully.",
         });
-      } catch (e: any) {
-        console.error("AI Analysis Error:", e);
-        setError(e.message || "An unexpected error occurred during analysis.");
+      } catch (e: unknown) {
+        const error = e as { message?: string };
+        console.error("AI Analysis Error:", error);
+        setError(error.message || "An unexpected error occurred during analysis.");
         toast({
           title: "Analysis Failed",
-          description: e.message || "Could not generate customer insights.",
+          description: error.message || "Could not generate customer insights.",
           variant: "destructive",
         });
       }
