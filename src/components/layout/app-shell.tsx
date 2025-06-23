@@ -70,11 +70,8 @@ const paymentsBillingItems = [
   { href: "/invoices", label: "Invoices", icon: ReceiptIcon },
   { href: "/smart-links-qr", label: "Smart Links (QR)", icon: QrCodeIcon },
   { href: "/virtual-terminal", label: "Virtual Terminal", icon: Wallet },
-  { href: "/crypto-payments", label: "Crypto Payments", icon: BitcoinIcon },
-];
-
-
-interface AppShellInternalProps {
+ { href: "/crypto", label: "Crypto Payments", icon: BitcoinIcon },
+];interface AppShellInternalProps {
   children: React.ReactNode;
   pageTitle: string;
 }

@@ -1,0 +1,22 @@
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+model CryptoTransaction {
+  id               String   @id @default(cuid())
+  merchantId       String
+  provider         String   // 'coinbase' | 'circle'
+  status           String   // 'pending', 'confirmed', 'synced'
+  amount           Float
+  currency         String
+  walletAddress    String
+  invoiceId        String?
+  syncedToQB       Boolean  @default(false)
+  syncedToNetSuite Boolean  @default(false)
+  createdAt        DateTime @default(now())
+}
